@@ -1,7 +1,7 @@
 const yesBox = document.getElementById("yes");
 const noBox = document.getElementById("no");
 
-function drinkCoffee(){
+const drinkCoffee = () => {
     if (Math.random() >= 0.5) {
         return true;
     } else {
@@ -9,7 +9,7 @@ function drinkCoffee(){
     }
 }
 
-function renderResult(result){
+const renderResult = (result) => {
     if (result) {
         yesBox.classList.remove("d-none");
     } else {
