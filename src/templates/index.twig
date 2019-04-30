@@ -1,10 +1,22 @@
 {% extends '_base.twig' %}
 
 
-{% block title %}Index page{% endblock %}
+{% block title %}
+  Index page
+{% endblock %}
 
 
 {% block content %}
-    <div class="container">
+  <div class="container">
+    <h1>Should I have a coffee?</h1>
+    <noscript>
+        <p>You need JavaScript to find out</p>
+    </noscript>
+    <div class="alert alert-success col-6 d-none" id="yes" role="alert">
+      Have a coffee
     </div>
+    <div class="alert alert-danger col-6 d-none" id="no" role="alert">
+      Don't have a coffee
+    </div>
+  </div>
 {% endblock %}
