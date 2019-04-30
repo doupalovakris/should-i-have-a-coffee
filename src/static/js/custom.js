@@ -11,7 +11,7 @@ const drinkCoffee = () => {
     }
 };
 
-const renderResult = (result) => {
+const renderResult = result => {
     if (result) {
         yesBox.classList.remove("d-none");
     } else {
