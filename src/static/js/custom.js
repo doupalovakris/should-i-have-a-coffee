@@ -1,10 +1,15 @@
-const yesBox = document.getElementById("yes");
-const noBox = document.getElementById("no");
-
-const drinkCoffee = () => {
+const drinkCoffee = (sunrise, noon, sunset) => {
     let today = new Date();
-    let hours = today.getHours();
-    if ((hours >= 10 && hours < 12) || (hours >= 14 && hours < 16)) {
+    let currentHour = today.getHours();
+    const morningStart = sunrise + 3;
+    const morningEnd = noon;
+    const afternoonStart = noon + 2;
+    const afternoonEnd = sunset - 3;
+
+    if (
+        (currentHour >= morningStart && currentHour < morningEnd) ||
+        (currentHour >= afternoonStart && currentHour < afternoonEnd)
+    ) {
         return true;
     } else {
         return false;
@@ -13,10 +18,27 @@ const drinkCoffee = () => {
 
 const renderResult = result => {
     if (result) {
-        yesBox.classList.remove("d-none");
+        document.getElementById("yes").classList.remove("d-none");
     } else {
-        noBox.classList.remove("d-none");
+        document.getElementById("no").classList.remove("d-none");
     }
 };
 
-renderResult(drinkCoffee());
+const getHourFromString = string => {
+    return parseInt(string.split("T")[1].split(":")[0]);
+};
+
+const parseData = data => {
+    renderResult(
+        drinkCoffee(getHourFromString(data.sunrise), getHourFromString(data.solar_noon), getHourFromString(data.sunset))
+    );
+};
+
+const getData = (latitude, longitude) => {
+    return fetch("https://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&formatted=0")
+        .then(response => response.json())
+        .then(data => parseData(data.results))
+        .catch(error => console.error(error));
+};
+
+getData(50, 14);
