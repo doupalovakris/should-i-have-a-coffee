@@ -41,4 +41,6 @@ const getData = (latitude, longitude) => {
         .catch(error => console.error(error));
 };
 
-getData(50, 14);
+navigator.geolocation.getCurrentPosition(position => {
+    getData(position.coords.latitude, position.coords.longitude);
+});
