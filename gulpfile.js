@@ -99,6 +99,8 @@ gulp.task(
     "develop",
     gulp.series(gulp.parallel("html:compile", "css:compile", "static:copy"), function startBrowsersync() {
         browserSync.init({
+            port: 80,
+
             // initalize Browsersync
             // set what files be served
             server: {
@@ -145,7 +147,7 @@ gulp.task(
         return surge({
             project: "dist",
             // change to your domain
-            domain: "https://my-first-website.surge.sh"
+            domain: "https://coffee-time-checker.surge.sh"
             // note 1: URL must end .surge.sh if you haven’t bought yours and configured DNS
             // note 2: https for custom domains is a paid feature
         });
